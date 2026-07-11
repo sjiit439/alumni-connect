@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard | Ravenshaw Alumni Connect</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-graduation-cap"></i> 
+                <span class="brand-uni">Ravenshaw</span> 
+                <span class="brand-app">Alumni Connect</span>
+            </a>
+            <div class="user-profile-nav">
+                <span id="userNameDisplay">Loading...</span>
+                <button class="btn btn-secondary" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="welcome-banner">
+            <h1>Welcome, <span id="studentName">Student</span> 👋</h1>
+            <p>Explore alumni directories, check for job referrals, and request mentorship.</p>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <i class="fa-solid fa-users icon-blue"></i>
+                <h3>Alumni Directory</h3>
+                <p>Find seniors working in companies like TCS, Infosys, and Google.</p>
+                <button class="btn btn-primary">Browse Alumni</button>
+            </div>
+            <div class="dashboard-card">
+                <i class="fa-solid fa-briefcase icon-green"></i>
+                <h3>Job & Internship Board</h3>
+                <p>Apply to positions posted directly by Ravenshaw alumni.</p>
+                <button class="btn btn-primary">View Jobs</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

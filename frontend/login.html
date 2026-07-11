@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Ravenshaw Alumni Connect</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="auth-body">
+
+    <div class="auth-card">
+        <a href="index.html" class="logo auth-logo">
+            <i class="fa-solid fa-graduation-cap"></i> 
+            <span class="brand-uni">Ravenshaw</span> 
+            <span class="brand-app">Alumni Connect</span>
+        </a>
+        
+        <h2>Welcome Back</h2>
+        <p class="auth-subtitle">Sign in to your account</p>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="loginEmail" placeholder="you@example.com" required>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="loginPassword" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary auth-btn">Login</button>
+            <p id="loginMsg" class="msg-box"></p>
+        </form>
+
+        <div class="auth-footer">
+            Don't have an account? <a href="register.html">Register Here</a>
+        </div>
+    </div>
+
+    <script src="js/login.js"></script>
+</body>
+</html>

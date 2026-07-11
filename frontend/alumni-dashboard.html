@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Dashboard | Ravenshaw Alumni Connect</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-graduation-cap"></i> 
+                <span class="brand-uni">Ravenshaw</span> 
+                <span class="brand-app">Alumni Connect</span>
+            </a>
+            <div class="user-profile-nav">
+                <span id="userNameDisplay">Loading...</span>
+                <button class="btn btn-secondary" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="welcome-banner alumni-banner">
+            <h1>Welcome back, <span id="alumniName">Alumnus</span> 🌟</h1>
+            <p><span id="alumniRole">Software Engineer</span> at <span id="alumniCompany">Tech Corp</span></p>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <i class="fa-solid fa-plus-circle icon-blue"></i>
+                <h3>Post a Job / Internship</h3>
+                <p>Help your juniors by sharing career opportunities in your company.</p>
+                <button class="btn btn-primary">+ Post Opportunity</button>
+            </div>
+            <div class="dashboard-card">
+                <i class="fa-solid fa-calendar-alt icon-green"></i>
+                <h3>Host a Session</h3>
+                <p>Schedule a webinar or career guidance talk for campus students.</p>
+                <button class="btn btn-primary">Create Event</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
