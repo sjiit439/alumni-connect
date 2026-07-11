@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const userStr = localStorage.getItem('user');
     
-    // Auth Check: Redirect to login if user is not logged in
+    // Redirect if unauthenticated
     if (!userStr) {
         window.location.href = 'login.html';
         return;
@@ -9,15 +9,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const user = JSON.parse(userStr);
 
-    // Set Navbar Name
     const userNameDisplay = document.getElementById('userNameDisplay');
     if (userNameDisplay) userNameDisplay.innerText = user.fullName;
 
-    // Fill Student Info
     const studentName = document.getElementById('studentName');
     if (studentName) studentName.innerText = user.fullName;
 
-    // Fill Alumni Info
     const alumniName = document.getElementById('alumniName');
     if (alumniName) alumniName.innerText = user.fullName;
 

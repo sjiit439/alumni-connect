@@ -23,7 +23,7 @@
                 <span class="brand-app">Alumni Connect</span>
             </a>
 
-            <!-- Hamburger Button for Mobile -->
+            <!-- Mobile Toggle Button -->
             <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
                 <i class="fa-solid fa-bars"></i>
             </button>
@@ -31,13 +31,11 @@
             <div class="nav-menu" id="navMenu">
                 <ul class="nav-links">
                     <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="#directory">Directory</a></li>
-                    <li><a href="#jobs">Jobs</a></li>
-                    <li><a href="#events">Events</a></li>
+                    <li><a href="#roles">Roles</a></li>
                 </ul>
                 <div class="auth-buttons">
-                    <button class="btn btn-secondary" onclick="openLoginModal()">Login</button>
-                    <button class="btn btn-primary" onclick="openRegisterModal()">Register</button>
+                    <a href="login.html" class="btn btn-secondary">Login</a>
+                    <a href="register.html" class="btn btn-primary">Register</a>
                 </div>
             </div>
         </div>
@@ -49,8 +47,8 @@
             <h1>Connecting Past, Present & Future</h1>
             <p>Empowering Ravenshaw students and alumni through mentorship, job opportunities, and lifelong university connections.</p>
             <div class="hero-buttons">
-                <a href="#roles" class="btn btn-primary btn-large">Get Started</a>
-                <a href="#directory" class="btn btn-secondary btn-large">Explore Directory</a>
+                <a href="register.html" class="btn btn-primary btn-large">Get Started</a>
+                <a href="#roles" class="btn btn-secondary btn-large">Explore Roles</a>
             </div>
         </div>
     </header>
@@ -92,7 +90,7 @@
                     <li><i class="fa-solid fa-check"></i> Explore exclusive job & internship postings</li>
                     <li><i class="fa-solid fa-check"></i> Request career guidance & resume reviews</li>
                 </ul>
-                <button class="btn btn-primary card-btn" onclick="openRegisterModal('student')">Join as Student</button>
+                <a href="register.html?role=student" class="btn btn-primary card-btn">Join as Student</a>
             </div>
 
             <div class="role-card highlight">
@@ -103,7 +101,7 @@
                     <li><i class="fa-solid fa-check"></i> Network with fellow batchmates & graduates</li>
                     <li><i class="fa-solid fa-check"></i> Host webinars & attend college reunions</li>
                 </ul>
-                <button class="btn btn-primary card-btn" onclick="openRegisterModal('alumni')">Join as Alumni</button>
+                <a href="register.html?role=alumni" class="btn btn-primary card-btn">Join as Alumni</a>
             </div>
         </div>
     </section>

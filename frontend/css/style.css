@@ -1,4 +1,4 @@
-/* --- Global Styles --- */
+/* --- Global Variables & Styling --- */
 :root {
     --primary-color: #2563eb;
     --primary-hover: #1d4ed8;
@@ -75,7 +75,6 @@ body {
     font-weight: 600;
 }
 
-/* Desktop Navigation Layout */
 .nav-menu {
     display: flex;
     align-items: center;
@@ -104,7 +103,6 @@ body {
     gap: 1rem;
 }
 
-/* Mobile Toggle Button */
 .menu-toggle {
     display: none;
     background: none;
@@ -292,117 +290,7 @@ body {
     width: 100%;
 }
 
-/* --- Footer --- */
-.footer {
-    background: var(--secondary-color);
-    color: #94a3b8;
-    text-align: center;
-    padding: 2rem 1.5rem;
-    margin-top: 4rem;
-}
-
-/* ==========================================================================
-   MOBILE & TABLET RESPONSIVE MEDIA QUERIES
-   ========================================================================== */
-
-/* Tablet View (max-width: 900px) */
-@media (max-width: 900px) {
-    .stats-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* Mobile Navigation & Screen View (max-width: 768px) */
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: block;
-    }
-
-    .nav-menu {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 280px;
-        height: 100vh;
-        background: var(--white);
-        flex-direction: column;
-        justify-content: flex-start;
-        padding: 5rem 2rem 2rem 2rem;
-        gap: 2rem;
-        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-        transition: right 0.3s ease;
-        z-index: 999;
-    }
-
-    .nav-menu.active {
-        right: 0;
-    }
-
-    .nav-overlay.active {
-        display: block;
-    }
-
-    .nav-links {
-        flex-direction: column;
-        width: 100%;
-        gap: 1.2rem;
-    }
-
-    .nav-links a {
-        font-size: 1.1rem;
-    }
-
-    .auth-buttons {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .auth-buttons .btn {
-        width: 100%;
-    }
-
-    .hero-content h1 {
-        font-size: 2.1rem;
-    }
-
-    .hero-content p {
-        font-size: 1rem;
-    }
-
-    .hero-buttons {
-        flex-direction: column;
-    }
-
-    .hero-buttons .btn {
-        width: 100%;
-    }
-
-    .roles-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Small Phones View (max-width: 480px) */
-@media (max-width: 480px) {
-    .logo {
-        font-size: 1.1rem;
-    }
-
-    .logo .brand-uni {
-        font-size: 0.95rem;
-    }
-
-    .stats-container {
-        grid-template-columns: 1fr;
-    }
-
-    .role-card {
-        padding: 1.5rem;
-    }
-}
-
-
-/* --- Form & Dashboard Styling --- */
+/* --- Form & Authentication Page Styles --- */
 .auth-body {
     display: flex;
     justify-content: center;
@@ -501,7 +389,7 @@ body {
     font-weight: 600;
 }
 
-/* Dashboard Styling */
+/* --- Dashboard Section Styles --- */
 .user-profile-nav {
     display: flex;
     align-items: center;
@@ -561,4 +449,47 @@ body {
     color: #64748b;
     margin-bottom: 1.5rem;
     font-size: 0.95rem;
+}
+
+.footer {
+    background: var(--secondary-color);
+    color: #94a3b8;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    margin-top: 4rem;
+}
+
+/* Mobile Media Queries */
+@media (max-width: 900px) {
+    .stats-container { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .menu-toggle { display: block; }
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: var(--white);
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 5rem 2rem 2rem 2rem;
+        gap: 2rem;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        transition: right 0.3s ease;
+        z-index: 999;
+    }
+    .nav-menu.active { right: 0; }
+    .nav-overlay.active { display: block; }
+    .nav-links { flex-direction: column; width: 100%; gap: 1.2rem; }
+    .auth-buttons { flex-direction: column; width: 100%; }
+    .auth-buttons .btn { width: 100%; }
+    .hero-content h1 { font-size: 2.1rem; }
+    .roles-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+    .stats-container { grid-template-columns: 1fr; }
 }

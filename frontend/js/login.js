@@ -19,14 +19,12 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         const data = await res.json();
 
         if (res.ok) {
-            // Store token & user info locally in browser storage
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
 
             msgBox.style.color = 'green';
             msgBox.innerText = "Login successful! Redirecting...";
 
-            // Redirect based on user role
             setTimeout(() => {
                 if (data.user.role === 'alumni') {
                     window.location.href = 'alumni-dashboard.html';

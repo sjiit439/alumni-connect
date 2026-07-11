@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-
-    // 1. Mobile Navigation Toggle Controls
+    // Mobile Navigation Controls
     const menuToggle = document.getElementById('menuToggle');
     const navMenu = document.getElementById('navMenu');
     const navOverlay = document.getElementById('navOverlay');
@@ -10,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
         navMenu.classList.toggle('active');
         navOverlay.classList.toggle('active');
 
-        // Change icon between Bars and Close
         const icon = menuToggle.querySelector('i');
         if (navMenu.classList.contains('active')) {
             icon.classList.remove('fa-bars');
@@ -25,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
         menuToggle.addEventListener('click', toggleMenu);
         navOverlay.addEventListener('click', toggleMenu);
 
-        // Close menu when clicking any nav link
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 if (navMenu.classList.contains('active')) {
@@ -35,9 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. Animated Stats Counter
+    // Animated Counter Stats
     const statNumbers = document.querySelectorAll('.stat-number');
-
     const animateStats = () => {
         statNumbers.forEach(stat => {
             const target = +stat.getAttribute('data-target');
@@ -53,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Trigger stats animation when scrolling into view
     let animated = false;
     window.addEventListener('scroll', () => {
         const statsSection = document.querySelector('.stats-section');
@@ -68,16 +63,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-
-// 3. Authentication Handlers
-function openLoginModal() {
-    alert("Login modal will open here.");
-}
-
-function openRegisterModal(role = 'default') {
-    if (role !== 'default') {
-        alert(`Opening registration form for: ${role.toUpperCase()}`);
-    } else {
-        alert("Opening registration modal.");
-    }
-}
