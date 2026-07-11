@@ -1,0 +1,402 @@
+/* --- Global Styles --- */
+:root {
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+    --brand-maroon: #800000;
+    --secondary-color: #0f172a;
+    --text-color: #334155;
+    --light-bg: #f8fafc;
+    --white: #ffffff;
+    --border-color: #e2e8f0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    color: var(--text-color);
+    background-color: var(--light-bg);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* --- Navbar & Responsive Header --- */
+.navbar {
+    background: var(--white);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+}
+
+.logo {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--secondary-color);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    letter-spacing: -0.5px;
+}
+
+.logo i {
+    color: var(--brand-maroon);
+    font-size: 1.5rem;
+}
+
+.logo .brand-uni {
+    color: var(--brand-maroon);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+}
+
+.logo .brand-app {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Desktop Navigation Layout */
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--primary-color);
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Mobile Toggle Button */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    cursor: pointer;
+}
+
+.nav-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.5);
+    z-index: 998;
+}
+
+/* --- Buttons --- */
+.btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--secondary-color);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background-color: #e2e8f0;
+}
+
+.btn-large {
+    padding: 0.8rem 1.8rem;
+    font-size: 1rem;
+}
+
+/* --- Hero Section --- */
+.hero {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    color: var(--white);
+    padding: 5rem 1.5rem;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-content h1 {
+    font-size: 2.8rem;
+    margin-bottom: 1.2rem;
+    line-height: 1.2;
+}
+
+.hero-content p {
+    font-size: 1.15rem;
+    color: #94a3b8;
+    margin-bottom: 2rem;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* --- Stats Banner --- */
+.stats-section {
+    background: var(--white);
+    padding: 3rem 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.stats-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    text-align: center;
+}
+
+.stat-card h2 {
+    font-size: 2.3rem;
+    color: var(--primary-color);
+}
+
+.stat-card p {
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+/* --- Roles Section --- */
+.roles-section {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 1.5rem;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-title h2 {
+    font-size: 2rem;
+    color: var(--secondary-color);
+}
+
+.roles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.role-card {
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2.5rem;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.role-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+.role-card.highlight {
+    border-color: var(--primary-color);
+}
+
+.role-icon {
+    font-size: 2.8rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.role-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+}
+
+.role-card ul {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+.role-card li {
+    margin-bottom: 0.8rem;
+    color: var(--text-color);
+}
+
+.role-card li i {
+    color: #16a34a;
+    margin-right: 0.5rem;
+}
+
+.card-btn {
+    width: 100%;
+}
+
+/* --- Footer --- */
+.footer {
+    background: var(--secondary-color);
+    color: #94a3b8;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    margin-top: 4rem;
+}
+
+/* ==========================================================================
+   MOBILE & TABLET RESPONSIVE MEDIA QUERIES
+   ========================================================================== */
+
+/* Tablet View (max-width: 900px) */
+@media (max-width: 900px) {
+    .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile Navigation & Screen View (max-width: 768px) */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: var(--white);
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 5rem 2rem 2rem 2rem;
+        gap: 2rem;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        transition: right 0.3s ease;
+        z-index: 999;
+    }
+
+    .nav-menu.active {
+        right: 0;
+    }
+
+    .nav-overlay.active {
+        display: block;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        width: 100%;
+        gap: 1.2rem;
+    }
+
+    .nav-links a {
+        font-size: 1.1rem;
+    }
+
+    .auth-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .auth-buttons .btn {
+        width: 100%;
+    }
+
+    .hero-content h1 {
+        font-size: 2.1rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+    }
+
+    .roles-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Small Phones View (max-width: 480px) */
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.1rem;
+    }
+
+    .logo .brand-uni {
+        font-size: 0.95rem;
+    }
+
+    .stats-container {
+        grid-template-columns: 1fr;
+    }
+
+    .role-card {
+        padding: 1.5rem;
+    }
+}
