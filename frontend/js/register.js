@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:5000/api/auth';
+// Relative API path works automatically across local and cloud/Codespaces environments
+const API_URL = '/api/auth';
 
 function toggleAlumniFields() {
     const roleSelect = document.getElementById('role');
