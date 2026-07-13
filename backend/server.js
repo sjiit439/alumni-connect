@@ -8,22 +8,22 @@ const authRoutes = require('./routes/auth');
 
 const app = express();
 
-// Middleware
-app.use(express.json());
+// 1. Enable CORS & JSON Request Parsing
 app.use(cors());
+app.use(express.json());
 
-// Serve static frontend files (HTML, CSS, JS) from the frontend directory
+// 2. Serve Frontend Files Statically
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-// API Routes
+// 3. API Routes
 app.use('/api/auth', authRoutes);
 
-// Fallback route using Express v5 splat syntax
+// 4. Catch-all fallback route
 app.get('/{*splat}', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
-// MongoDB Connection & Server Startup
+// MongoDB Connection & Server Start
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/ravenshaw_alumni';
 const PORT = process.env.PORT || 5000;
 

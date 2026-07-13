@@ -9,19 +9,21 @@ const JWT_SECRET = process.env.JWT_SECRET || 'ravenshaw_secret_key_123';
 // 1. REGISTER USER
 router.post('/register', async (req, res) => {
     try {
-        const { fullName, email, password, role, department, batchYear, company, designation, linkedinUrl } = req.body;
+        const { fullName, email, password, role, department, batchYear } = req.body;
 
-        // Check if user already exists
-        let user = await User.findOne({ email });
-        if (user) {
-            return res.status(400).json({ message: 'User with this email already exists' });
+        // Validation check
+        if (!fullName || !email || !password || !role || !department || !batchYear) {
+            return res.status(400).json({ message: 'Please fill in all required fields.' });
         }
 
-        // Hash password
+        let user = await User.findOne({ email });
+        if (user) {
+            return res.status(400).json({ message: 'User with this email already exists.' });
+        }
+
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        // Create user record
         user = new User({
             fullName,
             email,
@@ -29,17 +31,17 @@ router.post('/register', async (req, res) => {
             role,
             department,
             batchYear,
-            company: role === 'alumni' ? company : '',
-            designation: role === 'alumni' ? designation : '',
-            linkedinUrl: role === 'alumni' ? linkedinUrl : ''
+            company: req.body.company || '',
+            designation: req.body.designation || '',
+            linkedinUrl: req.body.linkedinUrl || ''
         });
 
         await user.save();
-        res.status(201).json({ message: 'Registration successful! Please login.' });
+        res.status(201).json({ message: 'Registration successful! Redirecting to login...' });
 
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: 'Server error during registration' });
+        console.error('Registration Error Details:', err); // Check terminal output when registering
+        res.status(500).json({ message: 'Server error during registration.' });
     }
 });
 
