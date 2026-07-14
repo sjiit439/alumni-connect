@@ -1,15 +1,13 @@
 [
   {
-    "id": "std_1784057217757",
+    "id": "std_1784061419219",
     "fullName": "Girish Kumar Shrambuka",
     "email": "gks@gmail.com",
-    "password": "$2a$10$Sjfb5NW8wR3p61sKlHCow.EMqJBLQvI0oiXXcoKrL0sbVMQyTtA2C",
+    "password": "$2a$10$R76U23r8cthdKEegqYIITufomjVK9rTS.jGy6hnAdTMgNHDyJNY7a",
     "role": "student",
     "department": "Computer Science",
+    "course": "BSc",
     "batchYear": "2024",
-    "company": "",
-    "designation": "",
-    "linkedinUrl": "",
-    "createdAt": "2026-07-14T19:26:57.757Z"
+    "createdAt": "2026-07-14T20:36:59.219Z"
   }
 ]

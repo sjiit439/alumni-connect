@@ -41,6 +41,7 @@ router.post('/register', async (req, res) => {
         const students = readFile(STUDENTS_FILE);
         const alumni = readFile(ALUMNI_FILE);
 
+        // Check for duplicate email across both student and alumni files
         const emailExists = students.some(u => u.email.toLowerCase() === cleanEmail) ||
                             alumni.some(u => u.email.toLowerCase() === cleanEmail);
 
@@ -51,6 +52,7 @@ router.post('/register', async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
+        // Base user object
         const newUser = {
             id: (role === 'alumni' ? 'alm_' : 'std_') + Date.now(),
             fullName: fullName.trim(),
@@ -59,12 +61,16 @@ router.post('/register', async (req, res) => {
             role,
             department,
             course,
-            batchYear,
-            company: req.body.company ? req.body.company.trim() : '',
-            designation: req.body.designation ? req.body.designation.trim() : '',
-            linkedinUrl: req.body.linkedinUrl ? req.body.linkedinUrl.trim() : '',
+            batchYear: batchYear.toString().trim(), // Enforce String data type
             createdAt: new Date().toISOString()
         };
+
+        // Add professional fields ONLY if the user is an alumnus
+        if (role === 'alumni') {
+            newUser.company = req.body.company ? req.body.company.trim() : '';
+            newUser.designation = req.body.designation ? req.body.designation.trim() : '';
+            newUser.linkedinUrl = req.body.linkedinUrl ? req.body.linkedinUrl.trim() : '';
+        }
 
         const targetFile = role === 'alumni' ? ALUMNI_FILE : STUDENTS_FILE;
         const targetList = role === 'alumni' ? alumni : students;
@@ -115,8 +121,8 @@ router.post('/login', async (req, res) => {
                 department: user.department,
                 course: user.course,
                 batchYear: user.batchYear,
-                company: user.company,
-                designation: user.designation
+                company: user.company || '',
+                designation: user.designation || ''
             }
         });
     } catch (err) {

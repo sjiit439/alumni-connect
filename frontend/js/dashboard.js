@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('alumniRole')) document.getElementById('alumniRole').innerText = user.designation || 'Alumnus';
     if (document.getElementById('alumniCompany')) document.getElementById('alumniCompany').innerText = user.company || 'Ravenshaw';
 
-    // Form submit listener for Alumni Job/Internship creation
     const jobForm = document.getElementById('postJobForm');
     if (jobForm) {
         jobForm.addEventListener('submit', async (e) => {
@@ -42,14 +41,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 description: document.getElementById('oppDescription').value,
                 postedBy: user.fullName,
                 
-                // Job Fields
                 post: document.getElementById('jobPost').value,
                 salary: document.getElementById('jobSalary').value,
                 jobProfile: document.getElementById('jobProfile').value,
                 experienceNeeded: document.getElementById('jobExperience').value,
                 placeOfRecruitment: document.getElementById('jobPlace').value,
 
-                // Internship Fields
                 stipend: document.getElementById('internStipend').value,
                 internExperience: document.getElementById('internExperience').value,
                 duration: document.getElementById('internDuration').value,
@@ -81,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Toggle Job vs Internship form inputs
 function toggleJobInternFields() {
     const oppType = document.getElementById('oppType').value;
     const jobFields = document.getElementById('jobSpecificFields');
@@ -96,9 +92,8 @@ function toggleJobInternFields() {
     }
 }
 
-// Show Alumni Section
 async function showAlumniSection() {
-    document.getElementById('jobsSection').classList.add('hidden');
+    if (document.getElementById('jobsSection')) document.getElementById('jobsSection').classList.add('hidden');
     const section = document.getElementById('alumniDirectorySection');
     section.classList.remove('hidden');
     section.scrollIntoView({ behavior: 'smooth' });
@@ -112,7 +107,6 @@ async function showAlumniSection() {
     }
 }
 
-// Filter Alumni Directory by Dept, Course, and Batch
 function filterAlumniDirectory() {
     const dept = document.getElementById('filterAlumniDept').value.toLowerCase();
     const course = document.getElementById('filterAlumniCourse').value.toLowerCase();
@@ -121,7 +115,7 @@ function filterAlumniDirectory() {
     const filtered = rawAlumniData.filter(a => {
         const matchDept = !dept || (a.department && a.department.toLowerCase() === dept);
         const matchCourse = !course || (a.course && a.course.toLowerCase() === course);
-        const matchBatch = !batch || (a.batchYear && a.batchYear.toString().includes(batch));
+        const matchBatch = !batch || (a.batchYear && a.batchYear.toString().trim().includes(batch));
         return matchDept && matchCourse && matchBatch;
     });
 
@@ -142,9 +136,8 @@ function filterAlumniDirectory() {
     `).join('');
 }
 
-// Show Jobs Section
 async function showJobsSection() {
-    document.getElementById('alumniDirectorySection').classList.add('hidden');
+    if (document.getElementById('alumniDirectorySection')) document.getElementById('alumniDirectorySection').classList.add('hidden');
     const section = document.getElementById('jobsSection');
     section.classList.remove('hidden');
     section.scrollIntoView({ behavior: 'smooth' });
@@ -158,7 +151,6 @@ async function showJobsSection() {
     }
 }
 
-// Filter Jobs Board by Department
 function filterJobsBoard() {
     const dept = document.getElementById('filterJobDept').value.toLowerCase();
 

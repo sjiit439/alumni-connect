@@ -1,8 +1,6 @@
-// Smart API URL Detection
 const getApiUrl = () => {
     const host = window.location.hostname;
     if (host.includes('app.github.dev')) {
-        // Automatically route to port 5000 in GitHub Codespaces
         const codespaceBase = host.replace(/-\d+\.app\.github\.dev$/, '');
         return `https://${codespaceBase}-5000.app.github.dev/api/auth`;
     }
@@ -21,18 +19,16 @@ function toggleAlumniFields() {
     }
 }
 
-// Show modal function - explicitly sets display to flex
 function showSuccessPopup(message) {
     const modal = document.getElementById('successModal');
     const modalMsg = document.getElementById('modalMsg');
     if (modalMsg) modalMsg.innerText = message || "Account registered successfully!";
     if (modal) {
         modal.classList.remove('hidden');
-        modal.style.display = 'flex'; // Force display on success
+        modal.style.display = 'flex';
     }
 }
 
-// Hide modal function
 function hideModal() {
     const modal = document.getElementById('successModal');
     if (modal) {
@@ -46,10 +42,8 @@ function redirectToLogin() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 🛑 FORCE MODAL TO BE HIDDEN ON INITIAL PAGE LOAD
     hideModal();
 
-    // Check URL parameters (e.g. register.html?role=alumni)
     const urlParams = new URLSearchParams(window.location.search);
     const roleParam = urlParams.get('role');
     
@@ -78,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 email: getValue('email'),
                 password: getValue('password'),
                 role: getValue('role'),
+                course: getValue('course'),
                 department: getValue('department'),
                 batchYear: getValue('batchYear'),
                 company: getValue('company'),
@@ -94,11 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const data = await res.json();
 
-                // 🎯 STRICT GUARD: ONLY SHOW POPUP IF SERVER RETURNED 200/201 SUCCESS
                 if (res.ok) {
                     showSuccessPopup(data.message);
                 } else {
-                    // Hide modal if it was somehow visible and display red error
                     hideModal();
                     if (msgBox) {
                         msgBox.style.color = 'red';
