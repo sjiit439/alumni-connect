@@ -1,0 +1,15 @@
+[
+  {
+    "id": "std_1784056268172",
+    "fullName": "gks",
+    "email": "gks@gmail.com",
+    "password": "$2a$10$QmQ6jRt6E3Ilh57ikjYdBOXsJY/oZArOezTtGdgUQqklw/.2x97se",
+    "role": "student",
+    "department": "Computer Science",
+    "batchYear": "2021",
+    "company": "",
+    "designation": "",
+    "linkedinUrl": "",
+    "createdAt": "2026-07-14T19:11:08.172Z"
+  }
+]

@@ -33,15 +33,50 @@
                 <i class="fa-solid fa-plus-circle icon-blue"></i>
                 <h3>Post a Job / Internship</h3>
                 <p>Help your juniors by sharing career opportunities in your company.</p>
-                <button class="btn btn-primary">+ Post Opportunity</button>
-            </div>
-            <div class="dashboard-card">
-                <i class="fa-solid fa-calendar-alt icon-green"></i>
-                <h3>Host a Session</h3>
-                <p>Schedule a webinar or career guidance talk for campus students.</p>
-                <button class="btn btn-primary">Create Event</button>
+                <button class="btn btn-primary" onclick="togglePostJobForm()">+ Post Opportunity</button>
             </div>
         </div>
+
+        <!-- POST JOB FORM SECTION -->
+        <section id="postJobSection" class="dashboard-section hidden">
+            <hr class="section-divider">
+            <h2><i class="fa-solid fa-file-circle-plus"></i> Share a New Career Opportunity</h2>
+            <form id="postJobForm" class="job-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Job Title</label>
+                        <input type="text" id="jobTitle" placeholder="e.g. Frontend Developer" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Company</label>
+                        <input type="text" id="jobCompany" placeholder="e.g. TCS / Wipro" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Opportunity Type</label>
+                        <select id="jobType" required>
+                            <option value="Full-Time Job">Full-Time Job</option>
+                            <option value="Internship">Internship</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input type="text" id="jobLocation" placeholder="e.g. Bhubaneswar / Remote">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Application Link / Referral Email</label>
+                    <input type="text" id="jobApplyLink" placeholder="e.g. https://company.careers/job or referral email">
+                </div>
+                <div class="form-group">
+                    <label>Job Description</label>
+                    <textarea id="jobDescription" rows="4" placeholder="Brief requirements, skills needed..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Publish Opportunity</button>
+                <p id="jobMsg" class="msg-box"></p>
+            </form>
+        </section>
     </div>
 
     <script src="js/dashboard.js"></script>

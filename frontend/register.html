@@ -9,6 +9,18 @@
 </head>
 <body class="auth-body">
 
+    <!-- Success Popup Modal (Hidden by default) -->
+    <div id="successModal" class="modal-overlay hidden" style="display: none;">
+        <div class="modal-card">
+            <div class="modal-icon text-green">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3>Registration Successful!</h3>
+            <p id="modalMsg">Your account has been registered successfully in users.json.</p>
+            <button class="btn btn-primary modal-btn" onclick="redirectToLogin()">Go to Login</button>
+        </div>
+    </div>
+
     <div class="auth-card">
         <a href="index.html" class="logo auth-logo">
             <i class="fa-solid fa-graduation-cap"></i> 

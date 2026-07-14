@@ -33,15 +33,33 @@
                 <i class="fa-solid fa-users icon-blue"></i>
                 <h3>Alumni Directory</h3>
                 <p>Find seniors working in top IT companies & public sectors.</p>
-                <button class="btn btn-primary">Browse Alumni</button>
+                <button class="btn btn-primary" onclick="showAlumniSection()">Browse Alumni</button>
             </div>
             <div class="dashboard-card">
                 <i class="fa-solid fa-briefcase icon-green"></i>
                 <h3>Job & Internship Board</h3>
                 <p>Apply to positions posted directly by Ravenshaw alumni.</p>
-                <button class="btn btn-primary">View Jobs</button>
+                <button class="btn btn-primary" onclick="showJobsSection()">View Jobs</button>
             </div>
         </div>
+
+        <!-- 1. ALUMNI DIRECTORY SECTION -->
+        <section id="alumniDirectorySection" class="dashboard-section hidden">
+            <hr class="section-divider">
+            <h2><i class="fa-solid fa-user-graduate"></i> Ravenshaw Alumni Directory</h2>
+            <div id="alumniListContainer" class="directory-grid">
+                <p>Loading alumni profiles...</p>
+            </div>
+        </section>
+
+        <!-- 2. JOB OPPORTUNITIES SECTION -->
+        <section id="jobsSection" class="dashboard-section hidden">
+            <hr class="section-divider">
+            <h2><i class="fa-solid fa-briefcase"></i> Latest Opportunities & Internships</h2>
+            <div id="jobsListContainer" class="directory-grid">
+                <p>Loading job postings...</p>
+            </div>
+        </section>
     </div>
 
     <script src="js/dashboard.js"></script>

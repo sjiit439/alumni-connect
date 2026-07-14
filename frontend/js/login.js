@@ -1,5 +1,7 @@
-// Relative API path works automatically across local and cloud/Codespaces environments
-const API_URL = '/api/auth';
+// Automatically detects if the frontend is served on port 5000 or elsewhere
+const API_URL = window.location.port === '5000' || window.location.origin.includes('github.dev')
+    ? '/api/auth'
+    : 'http://localhost:5000/api/auth';
 
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -38,6 +40,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
             msgBox.innerText = data.message;
         }
     } catch (err) {
+        console.error('Fetch Error:', err);
         msgBox.style.color = 'red';
         msgBox.innerText = "Failed to connect to backend server.";
     }
