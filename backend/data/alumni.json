@@ -1,1 +1,61 @@
-[]
+[
+  { "id": "alm_101", "fullName": "Subhasish Mohanty", "email": "subhasish.math@ravenshaw.ac.in", "department": "Mathematics", "course": "MSc", "batchYear": 2020, "company": "IISER Berhampur", "designation": "Assistant Professor", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_102", "fullName": "Priya Darshini Raut", "email": "priya.math@ravenshaw.ac.in", "department": "Mathematics", "course": "BSc", "batchYear": 2022, "company": "TCS", "designation": "Data Scientist", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_103", "fullName": "Animesh Das", "email": "animesh.math@ravenshaw.ac.in", "department": "Mathematics", "course": "Phd", "batchYear": 2019, "company": "Ravenshaw University", "designation": "Lecturer", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_104", "fullName": "Suman Senapati", "email": "suman.math@ravenshaw.ac.in", "department": "Mathematics", "course": "MSc", "batchYear": 2021, "company": "Deloitte", "designation": "Quantitative Analyst", "linkedinUrl": "https://linkedin.com" },
+
+  { "id": "alm_105", "fullName": "Deepak Kumar Nayak", "email": "deepak.cs@ravenshaw.ac.in", "department": "Computer Science", "course": "MCA", "batchYear": 2021, "company": "Infosys", "designation": "Senior Software Engineer", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_106", "fullName": "Ananya Mishra", "email": "ananya.cs@ravenshaw.ac.in", "department": "Computer Science", "course": "BSc", "batchYear": 2023, "company": "HighRadius", "designation": "Frontend Developer", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_107", "fullName": "Rakesh Ranjan Swain", "email": "rakesh.cs@ravenshaw.ac.in", "department": "Computer Science", "course": "BCA", "batchYear": 2022, "company": "Wipro", "designation": "Cloud Architect", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_108", "fullName": "Pooja Mohapatra", "email": "pooja.cs@ravenshaw.ac.in", "department": "Computer Science", "course": "MSc", "batchYear": 2020, "company": "Cognizant", "designation": "System Analyst", "linkedinUrl": "https://linkedin.com" },
+
+  { "id": "alm_109", "fullName": "Bibhuti Bhusan Sahoo", "email": "bibhuti.phy@ravenshaw.ac.in", "department": "Physics", "course": "MSc", "batchYear": 2018, "company": "ISRO", "designation": "Scientist SD", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_110", "fullName": "Madhusmita Behera", "email": "madhu.phy@ravenshaw.ac.in", "department": "Physics", "course": "BSc", "batchYear": 2021, "company": "BARC", "designation": "Scientific Officer", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_111", "fullName": "Satyajit Tripathy", "email": "satyajit.phy@ravenshaw.ac.in", "department": "Physics", "course": "Phd", "batchYear": 2017, "company": "IIT Bhubaneswar", "designation": "Postdoctoral Fellow", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_112", "fullName": "Lipika Samal", "email": "lipika.phy@ravenshaw.ac.in", "department": "Physics", "course": "BSc BEd", "batchYear": 2022, "company": "DAV Public School", "designation": "PGT Physics", "linkedinUrl": "https://linkedin.com" },
+
+  { "id": "alm_113", "fullName": "Debasis Pattnaik", "email": "debasis.chem@ravenshaw.ac.in", "department": "Chemistry", "course": "MSc", "batchYear": 2019, "company": "Cipla Ltd", "designation": "QC Lead", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_114", "fullName": "Archana Panda", "email": "archana.chem@ravenshaw.ac.in", "department": "Chemistry", "course": "Phd", "batchYear": 2020, "company": "DRL", "designation": "Research Scientist", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_115", "fullName": "Soumya Ranjan Mohanty", "email": "soumya.chem@ravenshaw.ac.in", "department": "Chemistry", "course": "BSc", "batchYear": 2022, "company": "Nalco", "designation": "Chemical Engineer", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_116", "fullName": "Sonali Dash", "email": "sonali.chem@ravenshaw.ac.in", "department": "Chemistry", "course": "MSc", "batchYear": 2021, "company": "Sun Pharma", "designation": "Analyst", "linkedinUrl": "https://linkedin.com" },
+
+  { "id": "alm_117", "fullName": "Asit Kumar Parida", "email": "asit.comm@ravenshaw.ac.in", "department": "Commerce", "course": "BBA", "batchYear": 2020, "company": "HDFC Bank", "designation": "Branch Manager", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_118", "fullName": "Sweta Tanaya Lenka", "email": "sweta.comm@ravenshaw.ac.in", "department": "Commerce", "course": "MBA", "batchYear": 2022, "company": "KPMG", "designation": "Financial Auditor", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_119", "fullName": "Rudra Prasad Pradhan", "email": "rudra.comm@ravenshaw.ac.in", "department": "Commerce", "course": "BA", "batchYear": 2021, "company": "ICICI Bank", "designation": "Credit Analyst", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_120", "fullName": "Sneha Sarangi", "email": "sneha.comm@ravenshaw.ac.in", "department": "Commerce", "course": "MBA", "batchYear": 2023, "company": "EY India", "designation": "Tax Associate", "linkedinUrl": "https://linkedin.com" },
+
+  { "id": "alm_121", "fullName": "Prasant Kumar Biswal", "email": "prasant.eco@ravenshaw.ac.in", "department": "Economics", "course": "MA", "batchYear": 2018, "company": "Reserve Bank of India", "designation": "Manager Grade B", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_122", "fullName": "Monalisa Sethi", "email": "monalisa.eco@ravenshaw.ac.in", "department": "Economics", "course": "BA", "batchYear": 2021, "company": "Odisha Finance Service", "designation": "OFS Officer", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_123", "fullName": "Gyanendra Malik", "email": "gyan.eco@ravenshaw.ac.in", "department": "Economics", "course": "MA", "batchYear": 2020, "company": "NITI Aayog", "designation": "Research Associate", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_124", "fullName": "Tanmayee Hota", "email": "tanmayee.eco@ravenshaw.ac.in", "department": "Economics", "course": "BA", "batchYear": 2022, "company": "CMIE", "designation": "Data Analyst", "linkedinUrl": "https://linkedin.com" },
+
+  { "id": "alm_125", "fullName": "Ashutosh Kanungo", "email": "ashu.eng@ravenshaw.ac.in", "department": "English", "course": "MA", "batchYear": 2019, "company": "The Hindu", "designation": "Sub-Editor", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_126", "fullName": "Bhakti Prava Sahoo", "email": "bhakti.eng@ravenshaw.ac.in", "department": "English", "course": "BA", "batchYear": 2022, "company": "Penguin India", "designation": "Content Strategist", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_127", "fullName": "Srikant Acharya", "email": "srikant.eng@ravenshaw.ac.in", "department": "English", "course": "Phd", "batchYear": 2018, "company": "Utkal University", "designation": "Assistant Professor", "linkedinUrl": "https://linkedin.com" },
+
+  { "id": "alm_128", "fullName": "Chitrasen Jena", "email": "chitrasen.jmc@ravenshaw.ac.in", "department": "JMC", "course": "MA", "batchYear": 2020, "company": "Sambad Digital", "designation": "Senior Correspondent", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_129", "fullName": "Rasmita Pradhan", "email": "rasmita.jmc@ravenshaw.ac.in", "department": "JMC", "course": "BA", "batchYear": 2022, "company": "O TV News", "designation": "News Anchor", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_130", "fullName": "Tapan Moharana", "email": "tapan.jmc@ravenshaw.ac.in", "department": "JMC", "course": "MA", "batchYear": 2021, "company": "Prameya News", "designation": "Media Producer", "linkedinUrl": "https://linkedin.com" },
+
+  { "id": "alm_131", "fullName": "Lalit Mohan Swain", "email": "lalit.zoo@ravenshaw.ac.in", "department": "Zoology", "course": "MSc", "batchYear": 2019, "company": "Wildlife Institute of India", "designation": "Senior Research Fellow", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_132", "fullName": "Nivedita Mahala", "email": "nivedita.zoo@ravenshaw.ac.in", "department": "Zoology", "course": "BSc", "batchYear": 2022, "company": "State Forest Dept", "designation": "Forest Ranger", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_133", "fullName": "Rajesh Tripathy", "email": "rajesh.bot@ravenshaw.ac.in", "department": "Botany", "course": "MSc", "batchYear": 2020, "company": "CRRI Cuttack", "designation": "Technical Officer", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_134", "fullName": "Manorama Das", "email": "manorama.bot@ravenshaw.ac.in", "department": "Botany", "course": "BSc BEd", "batchYear": 2021, "company": "Kendriya Vidyalaya", "designation": "TGT Bio", "linkedinUrl": "https://linkedin.com" },
+
+  { "id": "alm_135", "fullName": "Jyoti Ranjan Parida", "email": "jyoti.pol@ravenshaw.ac.in", "department": "Political Science", "course": "MA", "batchYear": 2018, "company": "Government of Odisha", "designation": "OAS Officer", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_136", "fullName": "Smaranika Sen", "email": "smaranika.pol@ravenshaw.ac.in", "department": "Political Science", "course": "BA BEd", "batchYear": 2021, "company": "State Secondary School", "designation": "Social Studies Teacher", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_137", "fullName": "Pradipta Khatua", "email": "pradipta.hist@ravenshaw.ac.in", "department": "History", "course": "MA", "batchYear": 2019, "company": "Archaeological Survey of India", "designation": "Assistant Archaeologist", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_138", "fullName": "Sailendra Nath Nayak", "email": "sailendra.geo@ravenshaw.ac.in", "department": "Geography", "course": "MSc", "batchYear": 2020, "company": "ORSAC Bhubaneswar", "designation": "GIS Analyst", "linkedinUrl": "https://linkedin.com" },
+
+  { "id": "alm_139", "fullName": "Goura Hari Sahoo", "email": "goura.odia@ravenshaw.ac.in", "department": "Odia", "course": "MA", "batchYear": 2018, "company": "Odisha Sahitya Akademi", "designation": "Research Officer", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_140", "fullName": "Pratima Das", "email": "pratima.odia@ravenshaw.ac.in", "department": "Odia", "course": "BA BEd", "batchYear": 2022, "company": "Govt High School", "designation": "Odia Teacher", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_141", "fullName": "Pinaki Routray", "email": "pinaki.geology@ravenshaw.ac.in", "department": "Geology", "course": "MSc", "batchYear": 2019, "company": "GSI India", "designation": "Geologist", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_142", "fullName": "Subhashree Jena", "email": "subhashree.soc@ravenshaw.ac.in", "department": "Sociology", "course": "MA", "batchYear": 2020, "company": "UNICEF Odisha", "designation": "Project Associate", "linkedinUrl": "https://linkedin.com" },
+
+  { "id": "alm_143", "fullName": "Kamlesh Verma", "email": "kamlesh.hindi@ravenshaw.ac.in", "department": "Hindi", "course": "MA", "batchYear": 2020, "company": "Central Translation Bureau", "designation": "Official Language Officer", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_144", "fullName": "Animesh Pradhan", "email": "animesh.bba@ravenshaw.ac.in", "department": "Business Administration", "course": "MBA", "batchYear": 2021, "company": "Amul India", "designation": "Marketing Manager", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_145", "fullName": "Dillip Mohanty", "email": "dillip.phil@ravenshaw.ac.in", "department": "Philosophy", "course": "MA", "batchYear": 2019, "company": "Ravenshaw Junior College", "designation": "Lecturer", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_146", "fullName": "Namita Samantaray", "email": "namita.psy@ravenshaw.ac.in", "department": "Psychology", "course": "MA", "batchYear": 2021, "company": "SCB Medical College", "designation": "Clinical Psychologist", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_147", "fullName": "Biswa Ranjan Barik", "email": "biswa.stat@ravenshaw.ac.in", "department": "Statistics", "course": "MSc", "batchYear": 2020, "company": "NSSO India", "designation": "Statistical Officer", "linkedinUrl": "https://linkedin.com" },
+  { "id": "alm_148", "fullName": "Saroj Kant Swain", "email": "saroj.edu@ravenshaw.ac.in", "department": "Education", "course": "BEd", "batchYear": 2022, "company": "SCERT Odisha", "designation": "Curriculum Developer", "linkedinUrl": "https://linkedin.com" }
+]

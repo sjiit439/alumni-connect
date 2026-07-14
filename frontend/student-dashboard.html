@@ -32,13 +32,13 @@
             <div class="dashboard-card">
                 <i class="fa-solid fa-users icon-blue"></i>
                 <h3>Alumni Directory</h3>
-                <p>Find seniors working in top IT companies & public sectors.</p>
+                <p>Find seniors working across academic, corporate, and government sectors.</p>
                 <button class="btn btn-primary" onclick="showAlumniSection()">Browse Alumni</button>
             </div>
             <div class="dashboard-card">
                 <i class="fa-solid fa-briefcase icon-green"></i>
                 <h3>Job & Internship Board</h3>
-                <p>Apply to positions posted directly by Ravenshaw alumni.</p>
+                <p>Apply to positions posted directly by Ravenshaw alumni by department.</p>
                 <button class="btn btn-primary" onclick="showJobsSection()">View Jobs</button>
             </div>
         </div>
@@ -47,8 +47,64 @@
         <section id="alumniDirectorySection" class="dashboard-section hidden">
             <hr class="section-divider">
             <h2><i class="fa-solid fa-user-graduate"></i> Ravenshaw Alumni Directory</h2>
+            
+            <div class="filter-box">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Filter Department</label>
+                        <select id="filterAlumniDept" onchange="filterAlumniDirectory()">
+                            <option value="">All Departments</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Education">Education</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="Statistics">Statistics</option>
+                            <option value="Zoology">Zoology</option>
+                            <option value="Botany">Botany</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Political Science">Political Science</option>
+                            <option value="History">History</option>
+                            <option value="Geography">Geography</option>
+                            <option value="Odia">Odia</option>
+                            <option value="Economics">Economics</option>
+                            <option value="Geology">Geology</option>
+                            <option value="Sociology">Sociology</option>
+                            <option value="Hindi">Hindi</option>
+                            <option value="Commerce">Commerce</option>
+                            <option value="English">English</option>
+                            <option value="Business Administration">Business Administration</option>
+                            <option value="JMC">JMC</option>
+                            <option value="Philosophy">Philosophy</option>
+                            <option value="Psychology">Psychology</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Filter Course</label>
+                        <select id="filterAlumniCourse" onchange="filterAlumniDirectory()">
+                            <option value="">All Courses</option>
+                            <option value="BSc">BSc</option>
+                            <option value="BA">BA</option>
+                            <option value="MSc">MSc</option>
+                            <option value="MA">MA</option>
+                            <option value="BSc BEd">BSc BEd</option>
+                            <option value="BA BEd">BA BEd</option>
+                            <option value="BEd">BEd</option>
+                            <option value="BCA">BCA</option>
+                            <option value="MCA">MCA</option>
+                            <option value="BBA">BBA</option>
+                            <option value="MBA">MBA</option>
+                            <option value="Phd">Phd</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Filter Batch / Year</label>
+                        <input type="number" id="filterAlumniBatch" placeholder="e.g. 2022" onkeyup="filterAlumniDirectory()">
+                    </div>
+                </div>
+            </div>
+
             <div id="alumniListContainer" class="directory-grid">
-                <p>Loading alumni profiles...</p>
+                <p>Select filter options or browse directory...</p>
             </div>
         </section>
 
@@ -56,8 +112,40 @@
         <section id="jobsSection" class="dashboard-section hidden">
             <hr class="section-divider">
             <h2><i class="fa-solid fa-briefcase"></i> Latest Opportunities & Internships</h2>
+            
+            <div class="filter-box">
+                <div class="form-group">
+                    <label>Filter Jobs by Department</label>
+                    <select id="filterJobDept" onchange="filterJobsBoard()">
+                        <option value="">All Departments</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Education">Education</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Chemistry">Chemistry</option>
+                        <option value="Statistics">Statistics</option>
+                        <option value="Zoology">Zoology</option>
+                        <option value="Botany">Botany</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Political Science">Political Science</option>
+                        <option value="History">History</option>
+                        <option value="Geography">Geography</option>
+                        <option value="Odia">Odia</option>
+                        <option value="Economics">Economics</option>
+                        <option value="Geology">Geology</option>
+                        <option value="Sociology">Sociology</option>
+                        <option value="Hindi">Hindi</option>
+                        <option value="Commerce">Commerce</option>
+                        <option value="English">English</option>
+                        <option value="Business Administration">Business Administration</option>
+                        <option value="JMC">JMC</option>
+                        <option value="Philosophy">Philosophy</option>
+                        <option value="Psychology">Psychology</option>
+                    </select>
+                </div>
+            </div>
+
             <div id="jobsListContainer" class="directory-grid">
-                <p>Loading job postings...</p>
+                <p>Loading opportunities...</p>
             </div>
         </section>
     </div>

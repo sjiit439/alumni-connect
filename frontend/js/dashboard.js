@@ -2,12 +2,14 @@ const getApiUrl = () => {
     const host = window.location.hostname;
     if (host.includes('app.github.dev')) {
         const codespaceBase = host.replace(/-\d+\.app\.github\.dev$/, '');
-        return `https://${codespaceBase}-5000.app.data`;
+        return `https://${codespaceBase}-5000.app.github.dev/api/data`;
     }
     return window.location.port === '5000' ? '/api/data' : 'http://localhost:5000/api/data';
 };
 
 const DATA_API_URL = getApiUrl();
+let rawAlumniData = [];
+let rawJobsData = [];
 
 document.addEventListener('DOMContentLoaded', () => {
     const userStr = localStorage.getItem('user');
@@ -24,21 +26,35 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('alumniRole')) document.getElementById('alumniRole').innerText = user.designation || 'Alumnus';
     if (document.getElementById('alumniCompany')) document.getElementById('alumniCompany').innerText = user.company || 'Ravenshaw';
 
-    // Handle Job Submission by Alumni
+    // Form submit listener for Alumni Job/Internship creation
     const jobForm = document.getElementById('postJobForm');
     if (jobForm) {
         jobForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const msgBox = document.getElementById('jobMsg');
 
+            const oppType = document.getElementById('oppType').value;
+
             const payload = {
-                title: document.getElementById('jobTitle').value,
-                company: document.getElementById('jobCompany').value,
-                type: document.getElementById('jobType').value,
-                location: document.getElementById('jobLocation').value,
-                applyLink: document.getElementById('jobApplyLink').value,
-                description: document.getElementById('jobDescription').value,
-                postedBy: user.fullName
+                type: oppType,
+                department: document.getElementById('oppDepartment').value,
+                company: document.getElementById('companyName').value,
+                description: document.getElementById('oppDescription').value,
+                postedBy: user.fullName,
+                
+                // Job Fields
+                post: document.getElementById('jobPost').value,
+                salary: document.getElementById('jobSalary').value,
+                jobProfile: document.getElementById('jobProfile').value,
+                experienceNeeded: document.getElementById('jobExperience').value,
+                placeOfRecruitment: document.getElementById('jobPlace').value,
+
+                // Internship Fields
+                stipend: document.getElementById('internStipend').value,
+                internExperience: document.getElementById('internExperience').value,
+                duration: document.getElementById('internDuration').value,
+                certificatesProvided: document.getElementById('internCertificates').value,
+                furtherJobOpportunities: document.getElementById('internJobOpportunity').value
             };
 
             try {
@@ -65,74 +81,130 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Toggle Alumni Directory Section & Fetch Data
+// Toggle Job vs Internship form inputs
+function toggleJobInternFields() {
+    const oppType = document.getElementById('oppType').value;
+    const jobFields = document.getElementById('jobSpecificFields');
+    const internFields = document.getElementById('internshipSpecificFields');
+
+    if (oppType === 'Job') {
+        jobFields.classList.remove('hidden');
+        internFields.classList.add('hidden');
+    } else {
+        jobFields.classList.add('hidden');
+        internFields.classList.remove('hidden');
+    }
+}
+
+// Show Alumni Section
 async function showAlumniSection() {
+    document.getElementById('jobsSection').classList.add('hidden');
     const section = document.getElementById('alumniDirectorySection');
-    const jobsSection = document.getElementById('jobsSection');
-    if (jobsSection) jobsSection.classList.add('hidden');
-    
     section.classList.remove('hidden');
     section.scrollIntoView({ behavior: 'smooth' });
 
-    const container = document.getElementById('alumniListContainer');
     try {
         const res = await fetch(`${DATA_API_URL}/alumni`);
-        const alumni = await res.json();
-
-        if (alumni.length === 0) {
-            container.innerHTML = '<p>No alumni profiles registered yet.</p>';
-            return;
-        }
-
-        container.innerHTML = alumni.map(a => `
-            <div class="info-card">
-                <h3><i class="fa-solid fa-user-tie"></i> ${a.fullName}</h3>
-                <p><strong>Role:</strong> ${a.designation || 'Alumnus'} at ${a.company || 'N/A'}</p>
-                <p><strong>Dept:</strong> ${a.department} (${a.batchYear})</p>
-                <p><strong>Email:</strong> <a href="mailto:${a.email}">${a.email}</a></p>
-                ${a.linkedinUrl ? `<a href="${a.linkedinUrl}" target="_blank" class="link-btn"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>` : ''}
-            </div>
-        `).join('');
+        rawAlumniData = await res.json();
+        filterAlumniDirectory();
     } catch (err) {
-        container.innerHTML = '<p style="color:red;">Error fetching alumni directory.</p>';
+        document.getElementById('alumniListContainer').innerHTML = '<p style="color:red;">Error loading alumni directory.</p>';
     }
 }
 
-// Toggle Jobs Section & Fetch Data
-async function showJobsSection() {
-    const section = document.getElementById('jobsSection');
-    const alumniSection = document.getElementById('alumniDirectorySection');
-    if (alumniSection) alumniSection.classList.add('hidden');
+// Filter Alumni Directory by Dept, Course, and Batch
+function filterAlumniDirectory() {
+    const dept = document.getElementById('filterAlumniDept').value.toLowerCase();
+    const course = document.getElementById('filterAlumniCourse').value.toLowerCase();
+    const batch = document.getElementById('filterAlumniBatch').value.trim();
 
+    const filtered = rawAlumniData.filter(a => {
+        const matchDept = !dept || (a.department && a.department.toLowerCase() === dept);
+        const matchCourse = !course || (a.course && a.course.toLowerCase() === course);
+        const matchBatch = !batch || (a.batchYear && a.batchYear.toString().includes(batch));
+        return matchDept && matchCourse && matchBatch;
+    });
+
+    const container = document.getElementById('alumniListContainer');
+    if (filtered.length === 0) {
+        container.innerHTML = '<p>No matching alumni records found.</p>';
+        return;
+    }
+
+    container.innerHTML = filtered.map(a => `
+        <div class="info-card">
+            <h3><i class="fa-solid fa-user-tie"></i> ${a.fullName}</h3>
+            <p><strong>Role:</strong> ${a.designation} at ${a.company}</p>
+            <p><strong>Degree:</strong> ${a.course} in ${a.department} (${a.batchYear})</p>
+            <p><strong>Email:</strong> <a href="mailto:${a.email}">${a.email}</a></p>
+            ${a.linkedinUrl ? `<a href="${a.linkedinUrl}" target="_blank" class="link-btn"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>` : ''}
+        </div>
+    `).join('');
+}
+
+// Show Jobs Section
+async function showJobsSection() {
+    document.getElementById('alumniDirectorySection').classList.add('hidden');
+    const section = document.getElementById('jobsSection');
     section.classList.remove('hidden');
     section.scrollIntoView({ behavior: 'smooth' });
 
-    const container = document.getElementById('jobsListContainer');
     try {
         const res = await fetch(`${DATA_API_URL}/jobs`);
-        const jobs = await res.json();
-
-        if (jobs.length === 0) {
-            container.innerHTML = '<p>No active opportunities posted yet.</p>';
-            return;
-        }
-
-        container.innerHTML = jobs.map(j => `
-            <div class="info-card job-card">
-                <span class="tag">${j.type}</span>
-                <h3>${j.title}</h3>
-                <p><strong>Company:</strong> ${j.company} (${j.location})</p>
-                <p class="desc">${j.description}</p>
-                <p class="posted-by"><small>Posted by ${j.postedBy} on ${j.createdAt}</small></p>
-                <a href="${j.applyLink}" target="_blank" class="btn btn-primary btn-sm">Apply / Contact</a>
-            </div>
-        `).join('');
+        rawJobsData = await res.json();
+        filterJobsBoard();
     } catch (err) {
-        container.innerHTML = '<p style="color:red;">Error loading opportunities.</p>';
+        document.getElementById('jobsListContainer').innerHTML = '<p style="color:red;">Error loading opportunities.</p>';
     }
 }
 
-// Toggle Post Job Form for Alumni
+// Filter Jobs Board by Department
+function filterJobsBoard() {
+    const dept = document.getElementById('filterJobDept').value.toLowerCase();
+
+    const filtered = rawJobsData.filter(j => !dept || (j.department && j.department.toLowerCase() === dept));
+
+    const container = document.getElementById('jobsListContainer');
+    if (filtered.length === 0) {
+        container.innerHTML = '<p>No opportunities posted for this department yet.</p>';
+        return;
+    }
+
+    container.innerHTML = filtered.map(j => {
+        if (j.type === 'Job') {
+            return `
+                <div class="info-card job-card">
+                    <span class="tag tag-job">Full-Time Job</span>
+                    <span class="tag tag-dept">${j.department}</span>
+                    <h3>${j.post || j.title}</h3>
+                    <p><strong>Company:</strong> ${j.company}</p>
+                    <p><strong>Salary:</strong> ${j.salary || 'N/A'}</p>
+                    <p><strong>Job Profile:</strong> ${j.jobProfile || 'N/A'}</p>
+                    <p><strong>Experience Required:</strong> ${j.experienceNeeded || 'N/A'}</p>
+                    <p><strong>Location:</strong> ${j.placeOfRecruitment || 'N/A'}</p>
+                    <p class="desc">${j.description}</p>
+                    <p class="posted-by"><small>Posted by ${j.postedBy} on ${j.createdAt}</small></p>
+                </div>
+            `;
+        } else {
+            return `
+                <div class="info-card job-card">
+                    <span class="tag tag-intern">Internship</span>
+                    <span class="tag tag-dept">${j.department}</span>
+                    <h3>${j.company} Internship</h3>
+                    <p><strong>Stipend:</strong> ${j.stipend || 'Unpaid'}</p>
+                    <p><strong>Duration:</strong> ${j.duration || 'N/A'}</p>
+                    <p><strong>Experience Req:</strong> ${j.internExperience || 'Freshers'}</p>
+                    <p><strong>Certificates Provided:</strong> ${j.certificatesProvided || 'Yes'}</p>
+                    <p><strong>Job Opportunity (PPO):</strong> ${j.furtherJobOpportunities || 'N/A'}</p>
+                    <p class="desc">${j.description}</p>
+                    <p class="posted-by"><small>Posted by ${j.postedBy} on ${j.createdAt}</small></p>
+                </div>
+            `;
+        }
+    }).join('');
+}
+
 function togglePostJobForm() {
     const section = document.getElementById('postJobSection');
     section.classList.toggle('hidden');

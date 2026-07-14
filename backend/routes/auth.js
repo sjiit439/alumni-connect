@@ -11,14 +11,7 @@ const DATA_DIR = path.resolve(__dirname, '../data');
 const STUDENTS_FILE = path.join(DATA_DIR, 'students.json');
 const ALUMNI_FILE = path.join(DATA_DIR, 'alumni.json');
 
-const ensureStorage = () => {
-    if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
-    if (!fs.existsSync(STUDENTS_FILE)) fs.writeFileSync(STUDENTS_FILE, JSON.stringify([], null, 2));
-    if (!fs.existsSync(ALUMNI_FILE)) fs.writeFileSync(ALUMNI_FILE, JSON.stringify([], null, 2));
-};
-
 const readFile = (filePath) => {
-    ensureStorage();
     try {
         return JSON.parse(fs.readFileSync(filePath, 'utf-8') || '[]');
     } catch (err) {
@@ -27,7 +20,6 @@ const readFile = (filePath) => {
 };
 
 const writeFile = (filePath, data) => {
-    ensureStorage();
     try {
         fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf-8');
         return true;
@@ -39,9 +31,9 @@ const writeFile = (filePath, data) => {
 // REGISTER USER
 router.post('/register', async (req, res) => {
     try {
-        const { fullName, email, password, role, department, batchYear } = req.body;
+        const { fullName, email, password, role, department, course, batchYear } = req.body;
 
-        if (!fullName || !email || !password || !role || !department || !batchYear) {
+        if (!fullName || !email || !password || !role || !department || !course || !batchYear) {
             return res.status(400).json({ message: 'Please fill in all required fields.' });
         }
 
@@ -49,7 +41,6 @@ router.post('/register', async (req, res) => {
         const students = readFile(STUDENTS_FILE);
         const alumni = readFile(ALUMNI_FILE);
 
-        // Duplicate check across BOTH student and alumni files
         const emailExists = students.some(u => u.email.toLowerCase() === cleanEmail) ||
                             alumni.some(u => u.email.toLowerCase() === cleanEmail);
 
@@ -67,6 +58,7 @@ router.post('/register', async (req, res) => {
             password: hashedPassword,
             role,
             department,
+            course,
             batchYear,
             company: req.body.company ? req.body.company.trim() : '',
             designation: req.body.designation ? req.body.designation.trim() : '',
@@ -74,7 +66,6 @@ router.post('/register', async (req, res) => {
             createdAt: new Date().toISOString()
         };
 
-        // Store into separate files according to role
         const targetFile = role === 'alumni' ? ALUMNI_FILE : STUDENTS_FILE;
         const targetList = role === 'alumni' ? alumni : students;
 
@@ -122,6 +113,7 @@ router.post('/login', async (req, res) => {
                 email: user.email,
                 role: user.role,
                 department: user.department,
+                course: user.course,
                 batchYear: user.batchYear,
                 company: user.company,
                 designation: user.designation

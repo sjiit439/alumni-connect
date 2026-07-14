@@ -32,47 +32,126 @@
             <div class="dashboard-card">
                 <i class="fa-solid fa-plus-circle icon-blue"></i>
                 <h3>Post a Job / Internship</h3>
-                <p>Help your juniors by sharing career opportunities in your company.</p>
+                <p>Help your juniors by sharing career opportunities in your domain.</p>
                 <button class="btn btn-primary" onclick="togglePostJobForm()">+ Post Opportunity</button>
             </div>
         </div>
 
-        <!-- POST JOB FORM SECTION -->
+        <!-- POST JOB / INTERNSHIP FORM -->
         <section id="postJobSection" class="dashboard-section hidden">
             <hr class="section-divider">
             <h2><i class="fa-solid fa-file-circle-plus"></i> Share a New Career Opportunity</h2>
+            
             <form id="postJobForm" class="job-form">
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Job Title</label>
-                        <input type="text" id="jobTitle" placeholder="e.g. Frontend Developer" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Company</label>
-                        <input type="text" id="jobCompany" placeholder="e.g. TCS / Wipro" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
                         <label>Opportunity Type</label>
-                        <select id="jobType" required>
-                            <option value="Full-Time Job">Full-Time Job</option>
+                        <select id="oppType" onchange="toggleJobInternFields()" required>
+                            <option value="Job">Job</option>
                             <option value="Internship">Internship</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Location</label>
-                        <input type="text" id="jobLocation" placeholder="e.g. Bhubaneswar / Remote">
+                        <label>Target Department</label>
+                        <select id="oppDepartment" required>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Education">Education</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="Statistics">Statistics</option>
+                            <option value="Zoology">Zoology</option>
+                            <option value="Botany">Botany</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Political Science">Political Science</option>
+                            <option value="History">History</option>
+                            <option value="Geography">Geography</option>
+                            <option value="Odia">Odia</option>
+                            <option value="Economics">Economics</option>
+                            <option value="Geology">Geology</option>
+                            <option value="Sociology">Sociology</option>
+                            <option value="Hindi">Hindi</option>
+                            <option value="Commerce">Commerce</option>
+                            <option value="English">English</option>
+                            <option value="Business Administration">Business Administration</option>
+                            <option value="JMC">JMC</option>
+                            <option value="Philosophy">Philosophy</option>
+                            <option value="Psychology">Psychology</option>
+                        </select>
                     </div>
                 </div>
+
                 <div class="form-group">
-                    <label>Application Link / Referral Email</label>
-                    <input type="text" id="jobApplyLink" placeholder="e.g. https://company.careers/job or referral email">
+                    <label>Company / Organization Name</label>
+                    <input type="text" id="companyName" placeholder="e.g. TCS / IISER / Deloitte" required>
                 </div>
+
+                <!-- 🔵 JOB SPECIFIC FIELDS -->
+                <div id="jobSpecificFields">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Post / Position Name</label>
+                            <input type="text" id="jobPost" placeholder="e.g. Data Analyst / Research Associate">
+                        </div>
+                        <div class="form-group">
+                            <label>Salary Package (CTC / Monthly)</label>
+                            <input type="text" id="jobSalary" placeholder="e.g. ₹6.5 LPA / ₹45,000 pm">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Job Profile / Role Category</label>
+                            <input type="text" id="jobProfile" placeholder="e.g. Core R&D / Consulting / Tech">
+                        </div>
+                        <div class="form-group">
+                            <label>Experience Needed</label>
+                            <input type="text" id="jobExperience" placeholder="e.g. Fresher / 1-2 Years">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Place of Recruitment / Work Location</label>
+                        <input type="text" id="jobPlace" placeholder="e.g. Bhubaneswar / Hyderabad / Remote">
+                    </div>
+                </div>
+
+                <!-- 🟢 INTERNSHIP SPECIFIC FIELDS -->
+                <div id="internshipSpecificFields" class="hidden">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Monthly Stipend</label>
+                            <input type="text" id="internStipend" placeholder="e.g. ₹15,000 pm / Unpaid">
+                        </div>
+                        <div class="form-group">
+                            <label>Experience Required</label>
+                            <input type="text" id="internExperience" placeholder="e.g. Basic Python / None">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Duration</label>
+                            <input type="text" id="internDuration" placeholder="e.g. 3 Months / 6 Months">
+                        </div>
+                        <div class="form-group">
+                            <label>Certificates Provided?</label>
+                            <select id="internCertificates">
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Further Job Opportunities (PPO)?</label>
+                        <select id="internJobOpportunity">
+                            <option value="Possible PPO based on performance">Possible PPO</option>
+                            <option value="Internship Only">Internship Only</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div class="form-group">
-                    <label>Job Description</label>
-                    <textarea id="jobDescription" rows="4" placeholder="Brief requirements, skills needed..." required></textarea>
+                    <label>Additional Details / Application Instructions</label>
+                    <textarea id="oppDescription" rows="3" placeholder="Paste link or referral instructions..." required></textarea>
                 </div>
+
                 <button type="submit" class="btn btn-primary">Publish Opportunity</button>
                 <p id="jobMsg" class="msg-box"></p>
             </form>

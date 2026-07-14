@@ -9,14 +9,13 @@
 </head>
 <body class="auth-body">
 
-    <!-- Success Popup Modal (Hidden by default) -->
     <div id="successModal" class="modal-overlay hidden" style="display: none;">
         <div class="modal-card">
             <div class="modal-icon text-green">
                 <i class="fa-solid fa-circle-check"></i>
             </div>
             <h3>Registration Successful!</h3>
-            <p id="modalMsg">Your account has been registered successfully in users.json.</p>
+            <p id="modalMsg">Your account has been registered successfully.</p>
             <button class="btn btn-primary modal-btn" onclick="redirectToLogin()">Go to Login</button>
         </div>
     </div>
@@ -52,32 +51,68 @@
 
             <div class="form-row">
                 <div class="form-group">
-                    <label>Department</label>
-                    <select id="department" required>
-                        <option value="">Select Dept</option>
-                        <option value="Computer Science">Computer Science</option>
-                        <option value="Information Technology">Information Technology</option>
-                        <option value="Physics">Physics</option>
-                        <option value="Commerce">Commerce</option>
-                        <option value="Economics">Economics</option>
+                    <label>Course</label>
+                    <select id="course" required>
+                        <option value="">Select Course</option>
+                        <option value="BSc">BSc</option>
+                        <option value="BA">BA</option>
+                        <option value="MSc">MSc</option>
+                        <option value="MA">MA</option>
+                        <option value="BSc BEd">BSc BEd</option>
+                        <option value="BA BEd">BA BEd</option>
+                        <option value="BEd">BEd</option>
+                        <option value="BCA">BCA</option>
+                        <option value="MCA">MCA</option>
+                        <option value="BBA">BBA</option>
+                        <option value="MBA">MBA</option>
+                        <option value="Phd">Phd</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Batch / Passout Year</label>
-                    <input type="number" id="batchYear" placeholder="2026" required>
+                    <label>Department</label>
+                    <select id="department" required>
+                        <option value="">Select Dept</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Education">Education</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Chemistry">Chemistry</option>
+                        <option value="Statistics">Statistics</option>
+                        <option value="Zoology">Zoology</option>
+                        <option value="Botany">Botany</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Political Science">Political Science</option>
+                        <option value="History">History</option>
+                        <option value="Geography">Geography</option>
+                        <option value="Odia">Odia</option>
+                        <option value="Economics">Economics</option>
+                        <option value="Geology">Geology</option>
+                        <option value="Sociology">Sociology</option>
+                        <option value="Hindi">Hindi</option>
+                        <option value="Commerce">Commerce</option>
+                        <option value="English">English</option>
+                        <option value="Business Administration">Business Administration</option>
+                        <option value="JMC">JMC</option>
+                        <option value="Philosophy">Philosophy</option>
+                        <option value="Psychology">Psychology</option>
+                    </select>
                 </div>
+            </div>
+
+            <div class="form-group">
+                <label>Batch / Passout Year</label>
+                <input type="number" id="batchYear" placeholder="e.g. 2024" required>
             </div>
 
             <!-- Dynamic Alumni Fields -->
             <div id="alumniFields" class="hidden">
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Current Company</label>
-                        <input type="text" id="company" placeholder="e.g. TCS / Google">
+                        <label>Current Company / Organization</label>
+                        <input type="text" id="company" placeholder="e.g. TCS / Ravenshaw University">
                     </div>
                     <div class="form-group">
                         <label>Designation</label>
-                        <input type="text" id="designation" placeholder="e.g. Software Engineer">
+                        <input type="text" id="designation" placeholder="e.g. Assistant Professor / Software Developer">
                     </div>
                 </div>
                 <div class="form-group">
