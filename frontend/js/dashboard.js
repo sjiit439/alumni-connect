@@ -12,6 +12,13 @@ let rawAlumniData = [];
 let rawJobsData = [];
 let activeAlumniForMentorship = null;
 
+// GLOBAL LOGOUT FUNCTION
+function logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    window.location.href = 'login.html';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const userStr = localStorage.getItem('user');
     if (!userStr) {
@@ -27,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('alumniRole')) document.getElementById('alumniRole').innerText = user.designation || 'Alumnus';
     if (document.getElementById('alumniCompany')) document.getElementById('alumniCompany').innerText = user.company || 'Ravenshaw';
 
-    // Job submission listener
+    // Form: Post Job / Internship
     const jobForm = document.getElementById('postJobForm');
     if (jobForm) {
         jobForm.addEventListener('submit', async (e) => {
@@ -75,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Event/Webinar submission listener by alumni
+    // Form: Post Webinar / Event
     const eventForm = document.getElementById('postEventForm');
     if (eventForm) {
         eventForm.addEventListener('submit', async (e) => {
@@ -117,20 +124,47 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-function toggleJobInternFields() {
-    const oppType = document.getElementById('oppType').value;
-    const jobFields = document.getElementById('jobSpecificFields');
-    const internFields = document.getElementById('internshipSpecificFields');
+// --- ALUMNI DASHBOARD: SHOW RECEIVED MENTORSHIP REQUESTS ---
+async function showMentorshipRequests() {
+    const postJobSection = document.getElementById('postJobSection');
+    const postEventSection = document.getElementById('postEventSection');
+    if (postJobSection) postJobSection.classList.add('hidden');
+    if (postEventSection) postEventSection.classList.add('hidden');
 
-    if (oppType === 'Job') {
-        jobFields.classList.remove('hidden');
-        internFields.classList.add('hidden');
-    } else {
-        jobFields.classList.add('hidden');
-        internFields.classList.remove('hidden');
+    const section = document.getElementById('receivedMentorshipSection');
+    section.classList.remove('hidden');
+    section.scrollIntoView({ behavior: 'smooth' });
+
+    const user = JSON.parse(localStorage.getItem('user'));
+    const container = document.getElementById('mentorshipRequestsContainer');
+
+    try {
+        const identifier = encodeURIComponent(user.id || user.fullName);
+        const res = await fetch(`${DATA_API_URL}/mentorship/alumni/${identifier}`);
+        const requests = await res.json();
+
+        if (!requests || requests.length === 0) {
+            container.innerHTML = '<p>No mentorship requests received yet.</p>';
+            return;
+        }
+
+        container.innerHTML = requests.map(r => `
+            <div class="info-card">
+                <span class="tag tag-job"><i class="fa-solid fa-user-graduate"></i> Student Request</span>
+                <h3>${r.studentName}</h3>
+                <p><strong>Department:</strong> ${r.studentDept} (${r.studentCourse})</p>
+                <p><strong>Email:</strong> <a href="mailto:${r.studentEmail}">${r.studentEmail}</a></p>
+                <p><strong>Topic / Guidance Area:</strong> ${r.topic}</p>
+                <p class="desc">"${r.message}"</p>
+                <p class="posted-by"><small>Received on ${r.sentAt}</small></p>
+            </div>
+        `).join('');
+    } catch (err) {
+        container.innerHTML = '<p style="color:red;">Failed to load received mentorship requests.</p>';
     }
 }
 
+// --- STUDENT DASHBOARD: DIRECTORY & MENTORSHIP ---
 async function showAlumniSection() {
     if (document.getElementById('jobsSection')) document.getElementById('jobsSection').classList.add('hidden');
     const section = document.getElementById('alumniDirectorySection');
@@ -178,22 +212,28 @@ function filterAlumniDirectory() {
     `).join('');
 }
 
-// Mentorship Modal Controls
 function openMentorshipModal(alumniId, alumniName) {
     activeAlumniForMentorship = { id: alumniId, name: alumniName };
     document.getElementById('mentorModalTitle').innerText = `Request Mentorship from ${alumniName}`;
-    document.getElementById('mentorshipModal').style.display = 'flex';
+    const modal = document.getElementById('mentorshipModal');
+    modal.style.display = 'flex';
+    modal.classList.remove('hidden');
+    document.getElementById('mentorModalMsg').innerText = '';
 }
 
 function closeMentorshipModal() {
-    document.getElementById('mentorshipModal').style.display = 'none';
+    const modal = document.getElementById('mentorshipModal');
+    modal.style.display = 'none';
+    modal.classList.add('hidden');
+    document.getElementById('mentorTopic').value = '';
+    document.getElementById('mentorMessage').value = '';
     activeAlumniForMentorship = null;
 }
 
 async function submitMentorshipRequest() {
     const user = JSON.parse(localStorage.getItem('user'));
-    const topic = document.getElementById('mentorTopic').value;
-    const message = document.getElementById('mentorMessage').value;
+    const topic = document.getElementById('mentorTopic').value.trim();
+    const message = document.getElementById('mentorMessage').value.trim();
     const msgBox = document.getElementById('mentorModalMsg');
 
     if (!topic || !message) {
@@ -208,6 +248,9 @@ async function submitMentorshipRequest() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 studentEmail: user.email,
+                studentName: user.fullName,
+                studentDept: user.department,
+                studentCourse: user.course,
                 alumniId: activeAlumniForMentorship.id,
                 alumniName: activeAlumniForMentorship.name,
                 topic,
@@ -222,14 +265,14 @@ async function submitMentorshipRequest() {
             setTimeout(() => {
                 closeMentorshipModal();
                 window.location.href = 'my-mentorship.html';
-            }, 1200);
+            }, 1000);
         } else {
             msgBox.style.color = 'red';
             msgBox.innerText = data.message;
         }
     } catch (err) {
         msgBox.style.color = 'red';
-        msgBox.innerText = 'Failed to send request.';
+        msgBox.innerText = 'Failed to submit request.';
     }
 }
 
@@ -250,10 +293,9 @@ async function showJobsSection() {
 
 function filterJobsBoard() {
     const dept = document.getElementById('filterJobDept').value.toLowerCase();
-
     const filtered = rawJobsData.filter(j => !dept || (j.department && j.department.toLowerCase() === dept));
-
     const container = document.getElementById('jobsListContainer');
+
     if (filtered.length === 0) {
         container.innerHTML = '<p>No opportunities posted for this department yet.</p>';
         return;
@@ -268,8 +310,6 @@ function filterJobsBoard() {
                     <h3>${j.post || j.title}</h3>
                     <p><strong>Company:</strong> ${j.company}</p>
                     <p><strong>Salary:</strong> ${j.salary || 'N/A'}</p>
-                    <p><strong>Job Profile:</strong> ${j.jobProfile || 'N/A'}</p>
-                    <p><strong>Experience Required:</strong> ${j.experienceNeeded || 'N/A'}</p>
                     <p><strong>Location:</strong> ${j.placeOfRecruitment || 'N/A'}</p>
                     <p class="desc">${j.description}</p>
                     <p class="posted-by"><small>Posted by ${j.postedBy} on ${j.createdAt}</small></p>
@@ -283,9 +323,6 @@ function filterJobsBoard() {
                     <h3>${j.company} Internship</h3>
                     <p><strong>Stipend:</strong> ${j.stipend || 'Unpaid'}</p>
                     <p><strong>Duration:</strong> ${j.duration || 'N/A'}</p>
-                    <p><strong>Experience Req:</strong> ${j.internExperience || 'Freshers'}</p>
-                    <p><strong>Certificates Provided:</strong> ${j.certificatesProvided || 'Yes'}</p>
-                    <p><strong>Job Opportunity (PPO):</strong> ${j.furtherJobOpportunities || 'N/A'}</p>
                     <p class="desc">${j.description}</p>
                     <p class="posted-by"><small>Posted by ${j.postedBy} on ${j.createdAt}</small></p>
                 </div>
@@ -294,7 +331,26 @@ function filterJobsBoard() {
     }).join('');
 }
 
+function toggleJobInternFields() {
+    const oppType = document.getElementById('oppType').value;
+    const jobFields = document.getElementById('jobSpecificFields');
+    const internFields = document.getElementById('internshipSpecificFields');
+
+    if (oppType === 'Job') {
+        jobFields.classList.remove('hidden');
+        internFields.classList.add('hidden');
+    } else {
+        jobFields.classList.add('hidden');
+        internFields.classList.remove('hidden');
+    }
+}
+
 function togglePostJobForm() {
+    const receivedMentorshipSection = document.getElementById('receivedMentorshipSection');
+    const postEventSection = document.getElementById('postEventSection');
+    if (receivedMentorshipSection) receivedMentorshipSection.classList.add('hidden');
+    if (postEventSection) postEventSection.classList.add('hidden');
+
     const section = document.getElementById('postJobSection');
     section.classList.toggle('hidden');
     if (!section.classList.contains('hidden')) {
@@ -303,15 +359,14 @@ function togglePostJobForm() {
 }
 
 function togglePostEventForm() {
+    const receivedMentorshipSection = document.getElementById('receivedMentorshipSection');
+    const postJobSection = document.getElementById('postJobSection');
+    if (receivedMentorshipSection) receivedMentorshipSection.classList.add('hidden');
+    if (postJobSection) postJobSection.classList.add('hidden');
+
     const section = document.getElementById('postEventSection');
     section.classList.toggle('hidden');
     if (!section.classList.contains('hidden')) {
         section.scrollIntoView({ behavior: 'smooth' });
     }
-}
-
-function logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    window.location.href = 'login.html';
 }

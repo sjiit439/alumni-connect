@@ -20,25 +20,45 @@ document.addEventListener('DOMContentLoaded', async () => {
     const container = document.getElementById('mentorshipListContainer');
 
     try {
-        const res = await fetch(`${DATA_API_URL}/mentorship/${user.email}`);
+        const encodedEmail = encodeURIComponent(user.email);
+        const res = await fetch(`${DATA_API_URL}/mentorship/${encodedEmail}`);
+        
+        if (!res.ok) {
+            throw new Error(`HTTP Error Status: ${res.status}`);
+        }
+
         const requests = await res.json();
 
-        if (requests.length === 0) {
-            container.innerHTML = '<p>You have not submitted any mentorship requests yet. Browse the Alumni Directory to request guidance!</p>';
+        if (!requests || requests.length === 0) {
+            container.innerHTML = `
+                <div class="info-card" style="grid-column: 1/-1; text-align: center; padding: 3rem;">
+                    <i class="fa-solid fa-envelope-open" style="font-size: 3rem; color: #cbd5e1; margin-bottom: 1rem;"></i>
+                    <p style="color: #64748b; font-size: 1.1rem;">You haven't requested mentorship from any seniors yet.</p>
+                    <a href="student-dashboard.html" class="btn btn-primary" style="display: inline-block; margin-top: 1rem;">Browse Alumni Directory</a>
+                </div>
+            `;
             return;
         }
 
         container.innerHTML = requests.map(r => `
             <div class="info-card">
-                <span class="tag tag-dept">${r.status}</span>
-                <h3>To: ${r.alumniName}</h3>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                    <span class="tag tag-intern" style="background: #e0f2fe; color: #0369a1; font-weight: 700;">
+                        <i class="fa-solid fa-clock"></i> ${r.status || 'Pending'}
+                    </span>
+                    <span style="font-size: 0.8rem; color: #94a3b8;">${r.sentAt || ''}</span>
+                </div>
+                <h3 style="margin: 0.5rem 0;"><i class="fa-solid fa-user-tie"></i> Sent to: ${r.alumniName}</h3>
                 <p><strong>Topic:</strong> ${r.topic}</p>
-                <p class="desc">"${r.message}"</p>
-                <p class="posted-by"><small>Sent on ${r.sentAt}</small></p>
+                <div class="desc" style="background: #f8fafc; border-left: 3px solid #cbd5e1; padding: 0.75rem; margin-top: 0.5rem; border-radius: 4px;">
+                    <strong style="font-size: 0.8rem; color: #64748b; display: block; margin-bottom: 0.25rem;">Your Message:</strong>
+                    <span style="font-style: italic; color: #334155;">"${r.message}"</span>
+                </div>
             </div>
         `).join('');
     } catch (err) {
-        container.innerHTML = '<p style="color:red;">Error loading mentorship requests.</p>';
+        console.error('Mentorship Fetch Error:', err);
+        container.innerHTML = '<p style="color:red; text-align: center;">Error loading mentorship records. Ensure backend server is running.</p>';
     }
 });
 
