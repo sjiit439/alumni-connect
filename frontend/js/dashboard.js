@@ -10,6 +10,7 @@ const getApiUrl = () => {
 const DATA_API_URL = getApiUrl();
 let rawAlumniData = [];
 let rawJobsData = [];
+let activeAlumniForMentorship = null;
 
 document.addEventListener('DOMContentLoaded', () => {
     const userStr = localStorage.getItem('user');
@@ -26,27 +27,24 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('alumniRole')) document.getElementById('alumniRole').innerText = user.designation || 'Alumnus';
     if (document.getElementById('alumniCompany')) document.getElementById('alumniCompany').innerText = user.company || 'Ravenshaw';
 
+    // Job submission listener
     const jobForm = document.getElementById('postJobForm');
     if (jobForm) {
         jobForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const msgBox = document.getElementById('jobMsg');
 
-            const oppType = document.getElementById('oppType').value;
-
             const payload = {
-                type: oppType,
+                type: document.getElementById('oppType').value,
                 department: document.getElementById('oppDepartment').value,
                 company: document.getElementById('companyName').value,
                 description: document.getElementById('oppDescription').value,
                 postedBy: user.fullName,
-                
                 post: document.getElementById('jobPost').value,
                 salary: document.getElementById('jobSalary').value,
                 jobProfile: document.getElementById('jobProfile').value,
                 experienceNeeded: document.getElementById('jobExperience').value,
                 placeOfRecruitment: document.getElementById('jobPlace').value,
-
                 stipend: document.getElementById('internStipend').value,
                 internExperience: document.getElementById('internExperience').value,
                 duration: document.getElementById('internDuration').value,
@@ -73,6 +71,47 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (err) {
                 msgBox.style.color = 'red';
                 msgBox.innerText = 'Failed to submit opportunity.';
+            }
+        });
+    }
+
+    // Event/Webinar submission listener by alumni
+    const eventForm = document.getElementById('postEventForm');
+    if (eventForm) {
+        eventForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const msgBox = document.getElementById('eventMsg');
+
+            const payload = {
+                type: document.getElementById('eventType').value,
+                title: document.getElementById('eventTitle').value,
+                category: document.getElementById('eventCategory').value,
+                department: document.getElementById('eventDepartment').value,
+                eventDate: document.getElementById('eventDate').value,
+                speaker: user.fullName,
+                meetingLink: document.getElementById('eventLink').value,
+                description: document.getElementById('eventDesc').value
+            };
+
+            try {
+                const res = await fetch(`${DATA_API_URL}/events`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await res.json();
+                if (res.ok) {
+                    msgBox.style.color = 'green';
+                    msgBox.innerText = data.message;
+                    eventForm.reset();
+                } else {
+                    msgBox.style.color = 'red';
+                    msgBox.innerText = data.message;
+                }
+            } catch (err) {
+                msgBox.style.color = 'red';
+                msgBox.innerText = 'Failed to publish event.';
             }
         });
     }
@@ -131,9 +170,67 @@ function filterAlumniDirectory() {
             <p><strong>Role:</strong> ${a.designation} at ${a.company}</p>
             <p><strong>Degree:</strong> ${a.course} in ${a.department} (${a.batchYear})</p>
             <p><strong>Email:</strong> <a href="mailto:${a.email}">${a.email}</a></p>
-            ${a.linkedinUrl ? `<a href="${a.linkedinUrl}" target="_blank" class="link-btn"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>` : ''}
+            <div style="margin-top: 0.8rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                ${a.linkedinUrl ? `<a href="${a.linkedinUrl}" target="_blank" class="btn btn-secondary btn-sm"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>` : ''}
+                <button class="btn btn-primary btn-sm" onclick="openMentorshipModal('${a.id}', '${a.fullName}')">🤝 Request Mentorship</button>
+            </div>
         </div>
     `).join('');
+}
+
+// Mentorship Modal Controls
+function openMentorshipModal(alumniId, alumniName) {
+    activeAlumniForMentorship = { id: alumniId, name: alumniName };
+    document.getElementById('mentorModalTitle').innerText = `Request Mentorship from ${alumniName}`;
+    document.getElementById('mentorshipModal').style.display = 'flex';
+}
+
+function closeMentorshipModal() {
+    document.getElementById('mentorshipModal').style.display = 'none';
+    activeAlumniForMentorship = null;
+}
+
+async function submitMentorshipRequest() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const topic = document.getElementById('mentorTopic').value;
+    const message = document.getElementById('mentorMessage').value;
+    const msgBox = document.getElementById('mentorModalMsg');
+
+    if (!topic || !message) {
+        msgBox.style.color = 'red';
+        msgBox.innerText = 'Please fill in both topic and message.';
+        return;
+    }
+
+    try {
+        const res = await fetch(`${DATA_API_URL}/mentorship`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                studentEmail: user.email,
+                alumniId: activeAlumniForMentorship.id,
+                alumniName: activeAlumniForMentorship.name,
+                topic,
+                message
+            })
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+            msgBox.style.color = 'green';
+            msgBox.innerText = data.message;
+            setTimeout(() => {
+                closeMentorshipModal();
+                window.location.href = 'my-mentorship.html';
+            }, 1200);
+        } else {
+            msgBox.style.color = 'red';
+            msgBox.innerText = data.message;
+        }
+    } catch (err) {
+        msgBox.style.color = 'red';
+        msgBox.innerText = 'Failed to send request.';
+    }
 }
 
 async function showJobsSection() {
@@ -199,6 +296,14 @@ function filterJobsBoard() {
 
 function togglePostJobForm() {
     const section = document.getElementById('postJobSection');
+    section.classList.toggle('hidden');
+    if (!section.classList.contains('hidden')) {
+        section.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+function togglePostEventForm() {
+    const section = document.getElementById('postEventSection');
     section.classList.toggle('hidden');
     if (!section.classList.contains('hidden')) {
         section.scrollIntoView({ behavior: 'smooth' });

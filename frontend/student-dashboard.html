@@ -16,6 +16,8 @@
                 <span class="brand-app">Alumni Connect</span>
             </a>
             <div class="user-profile-nav">
+                <button class="btn btn-secondary" onclick="window.location.href='events.html'">📅 Events & Feed</button>
+                <button class="btn btn-secondary" onclick="window.location.href='my-mentorship.html'">🤝 My Requests</button>
                 <span id="userNameDisplay">Loading...</span>
                 <button class="btn btn-secondary" onclick="logout()">Logout</button>
             </div>
@@ -25,7 +27,7 @@
     <div class="dashboard-container">
         <div class="welcome-banner">
             <h1>Welcome, <span id="studentName">Student</span> 👋</h1>
-            <p>Explore alumni directories, check for job referrals, and request mentorship.</p>
+            <p>Explore alumni directories, check for job referrals, request mentorship, and join upcoming webinars.</p>
         </div>
 
         <div class="dashboard-grid">
@@ -41,9 +43,33 @@
                 <p>Apply to positions posted directly by Ravenshaw alumni by department.</p>
                 <button class="btn btn-primary" onclick="showJobsSection()">View Jobs</button>
             </div>
+            <div class="dashboard-card">
+                <i class="fa-solid fa-calendar-check icon-blue"></i>
+                <h3>Campus Webinars & Feed</h3>
+                <p>Explore virtual sessions, guest talks, and campus achievements.</p>
+                <button class="btn btn-primary" onclick="window.location.href='events.html'">Explore Feed</button>
+            </div>
         </div>
 
-        <!-- 1. ALUMNI DIRECTORY SECTION -->
+        <!-- MENTORSHIP REQUEST MODAL -->
+        <div id="mentorshipModal" class="modal-overlay hidden" style="display: none;">
+            <div class="modal-card">
+                <h3 id="mentorModalTitle">Request Mentorship</h3>
+                <div class="form-group" style="text-align: left; margin-top: 1rem;">
+                    <label>Mentorship Topic / Guidance Area</label>
+                    <input type="text" id="mentorTopic" placeholder="e.g. Resume Review / Core Exam Guidance">
+                </div>
+                <div class="form-group" style="text-align: left;">
+                    <label>Your Message / Question</label>
+                    <textarea id="mentorMessage" rows="3" placeholder="Briefly describe what assistance you need..."></textarea>
+                </div>
+                <button class="btn btn-primary modal-btn" onclick="submitMentorshipRequest()">Send Request</button>
+                <button class="btn btn-secondary modal-btn" style="margin-top: 0.5rem;" onclick="closeMentorshipModal()">Cancel</button>
+                <p id="mentorModalMsg" class="msg-box"></p>
+            </div>
+        </div>
+
+        <!-- ALUMNI DIRECTORY SECTION -->
         <section id="alumniDirectorySection" class="dashboard-section hidden">
             <hr class="section-divider">
             <h2><i class="fa-solid fa-user-graduate"></i> Ravenshaw Alumni Directory</h2>
@@ -54,28 +80,11 @@
                         <label>Filter Department</label>
                         <select id="filterAlumniDept" onchange="filterAlumniDirectory()">
                             <option value="">All Departments</option>
-                            <option value="Mathematics">Mathematics</option>
-                            <option value="Education">Education</option>
-                            <option value="Physics">Physics</option>
-                            <option value="Chemistry">Chemistry</option>
-                            <option value="Statistics">Statistics</option>
-                            <option value="Zoology">Zoology</option>
-                            <option value="Botany">Botany</option>
                             <option value="Computer Science">Computer Science</option>
-                            <option value="Political Science">Political Science</option>
-                            <option value="History">History</option>
-                            <option value="Geography">Geography</option>
-                            <option value="Odia">Odia</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Physics">Physics</option>
                             <option value="Economics">Economics</option>
-                            <option value="Geology">Geology</option>
-                            <option value="Sociology">Sociology</option>
-                            <option value="Hindi">Hindi</option>
                             <option value="Commerce">Commerce</option>
-                            <option value="English">English</option>
-                            <option value="Business Administration">Business Administration</option>
-                            <option value="JMC">JMC</option>
-                            <option value="Philosophy">Philosophy</option>
-                            <option value="Psychology">Psychology</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -83,16 +92,8 @@
                         <select id="filterAlumniCourse" onchange="filterAlumniDirectory()">
                             <option value="">All Courses</option>
                             <option value="BSc">BSc</option>
-                            <option value="BA">BA</option>
-                            <option value="MSc">MSc</option>
-                            <option value="MA">MA</option>
-                            <option value="BSc BEd">BSc BEd</option>
-                            <option value="BA BEd">BA BEd</option>
-                            <option value="BEd">BEd</option>
-                            <option value="BCA">BCA</option>
                             <option value="MCA">MCA</option>
-                            <option value="BBA">BBA</option>
-                            <option value="MBA">MBA</option>
+                            <option value="MSc">MSc</option>
                             <option value="Phd">Phd</option>
                         </select>
                     </div>
@@ -108,7 +109,7 @@
             </div>
         </section>
 
-        <!-- 2. JOB OPPORTUNITIES SECTION -->
+        <!-- JOB OPPORTUNITIES SECTION -->
         <section id="jobsSection" class="dashboard-section hidden">
             <hr class="section-divider">
             <h2><i class="fa-solid fa-briefcase"></i> Latest Opportunities & Internships</h2>
@@ -118,28 +119,11 @@
                     <label>Filter Jobs by Department</label>
                     <select id="filterJobDept" onchange="filterJobsBoard()">
                         <option value="">All Departments</option>
-                        <option value="Mathematics">Mathematics</option>
-                        <option value="Education">Education</option>
-                        <option value="Physics">Physics</option>
-                        <option value="Chemistry">Chemistry</option>
-                        <option value="Statistics">Statistics</option>
-                        <option value="Zoology">Zoology</option>
-                        <option value="Botany">Botany</option>
                         <option value="Computer Science">Computer Science</option>
-                        <option value="Political Science">Political Science</option>
-                        <option value="History">History</option>
-                        <option value="Geography">Geography</option>
-                        <option value="Odia">Odia</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Physics">Physics</option>
                         <option value="Economics">Economics</option>
-                        <option value="Geology">Geology</option>
-                        <option value="Sociology">Sociology</option>
-                        <option value="Hindi">Hindi</option>
                         <option value="Commerce">Commerce</option>
-                        <option value="English">English</option>
-                        <option value="Business Administration">Business Administration</option>
-                        <option value="JMC">JMC</option>
-                        <option value="Philosophy">Philosophy</option>
-                        <option value="Psychology">Psychology</option>
                     </select>
                 </div>
             </div>

@@ -1,0 +1,36 @@
+[
+  {
+    "id": "evt_101",
+    "type": "Webinar",
+    "title": "Cracking Competitive Coding & GATE in Computer Science",
+    "category": "Technology",
+    "department": "Computer Science",
+    "eventDate": "2026-08-10T11:00",
+    "speaker": "Deepak Kumar Nayak (Infosys)",
+    "meetingLink": "https://meet.google.com/xyz-abc-def",
+    "description": "Interactive session covering DSA roadmap, interview preparation strategies, and gate exam key concepts.",
+    "createdAt": "15/07/2026"
+  },
+  {
+    "id": "evt_102",
+    "type": "Webinar",
+    "title": "Career Prospects in Economics & RBI Grade B Exam Prep",
+    "category": "Government & Public Services",
+    "department": "Economics",
+    "eventDate": "2026-08-15T15:00",
+    "speaker": "Prasant Kumar Biswal (RBI Grade B Manager)",
+    "meetingLink": "https://meet.google.com/eco-rbi-prep",
+    "description": "Guidance on cracking banking and regulatory body exams directly from an OFS officer.",
+    "createdAt": "14/07/2026"
+  },
+  {
+    "id": "news_101",
+    "type": "News",
+    "title": "Ravenshaw University Inks MoU for Advanced Science Research Labs",
+    "category": "Campus News",
+    "department": "Physics",
+    "description": "The Vice-Chancellor announced new state-of-the-art physics and chemistry research wings supported by DST grants.",
+    "postedBy": "Ravenshaw Alumni Association",
+    "createdAt": "12/07/2026"
+  }
+]

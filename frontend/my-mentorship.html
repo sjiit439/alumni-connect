@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Mentorship Requests | Ravenshaw Alumni Connect</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-graduation-cap"></i> 
+                <span class="brand-uni">Ravenshaw</span> 
+                <span class="brand-app">Alumni Connect</span>
+            </a>
+            <div class="user-profile-nav">
+                <button class="btn btn-secondary" onclick="window.location.href='student-dashboard.html'">Back to Dashboard</button>
+                <button class="btn btn-secondary" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="welcome-banner">
+            <h1>My Mentorship Requests 🤝</h1>
+            <p>Track advice requests, career questions, and resume feedback sent to senior alumni.</p>
+        </div>
+
+        <div id="mentorshipListContainer" class="directory-grid">
+            <p>Loading your mentorship requests...</p>
+        </div>
+    </div>
+
+    <script src="js/my-mentorship.js"></script>
+</body>
+</html>
